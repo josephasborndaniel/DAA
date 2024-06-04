@@ -1,0 +1,26 @@
+function convert(string, numRows)
+  if numRows == 1 or length(string) < numRows then
+    return string
+  rows = array with size numRows of empty strings
+  currentRow = 0
+  reverse = false
+  for each char in string
+    append char to rows[currentRow]
+    if reverse == false and currentRow == numRows - 1 then
+      reverse = true
+    else if reverse == true and currentRow == 0 then
+      reverse = false
+    end if
+    if reverse == false then
+      currentRow = currentRow + 1
+    else
+      currentRow = currentRow - 1
+    end if
+  end loop
+  result = ""
+  for each row in rows
+    append row to result
+  end loop
+
+  return result
+end function

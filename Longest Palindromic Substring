@@ -1,0 +1,20 @@
+FUNCTION LongestPalindrome(string s)
+  length := len(s)
+  IF length < 2 THEN
+    RETURN s
+  start := 0
+  end := 0
+  FOR i := 0 TO length - 1 DO
+    len1 := ExpandAroundCenter(s, i, i)  // odd-length palindrome
+    len2 := ExpandAroundCenter(s, i, i + 1)  // even-length palindrome
+    maxLength := MAX(len1, len2)
+    IF maxLength > (end - start) THEN
+      start := i - (maxLength - 1) DIV 2
+      end := i + maxLength DIV 2
+  RETURN substring(s, start, end + 1)
+
+FUNCTION ExpandAroundCenter(string s, int left, int right)
+  WHILE left >= 0 AND right < len(s) AND s[left] = s[right] DO
+    left := left - 1
+    right := right + 1
+  RETURN right - left - 1

@@ -1,0 +1,26 @@
+function longest_unique_substring(string)
+  # Initialize variables
+  longest_length := 0
+  start_index := 0
+  char_set := array with all characters as keys and boolean values as false (initialized to false)
+
+  # Loop through the string
+  for i := 0 to length(string) - 1 do
+    current_char := string[i]
+
+    # Check if character is already seen
+    if char_set[current_char] then
+      # Update start index if necessary (to remove previous occurrences)
+      start_index := max(start_index, char_set[current_char] + 1)
+    end if
+
+    # Update character set
+    char_set[current_char] := i
+
+    # Update longest length
+    longest_length := max(longest_length, i - start_index + 1)
+  end for
+
+  # Return the longest length
+  return longest_length
+end function

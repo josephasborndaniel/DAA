@@ -1,0 +1,39 @@
+function findMedian(arr1, arr2):
+  # Find the total length of the combined arrays
+  total_length = len(arr1) + len(arr2)
+
+  # Initialize variables to track indices and median elements
+  i = 0
+  j = 0
+  mid_index = total_length // 2  # Integer division for median index
+  median1 = None
+  median2 = None
+
+  # Iterate through both arrays until reaching the median position
+  for k in range(total_length + 1):
+    # Get elements from each array
+    element1 = arr1[i] if i < len(arr1) else None
+    element2 = arr2[j] if j < len(arr2) else None
+
+    # Find the first two median elements
+    if median1 is None and k == mid_index:
+      median1 = element1 if element1 is not None else element2
+    elif median2 is None and k == mid_index + 1:
+      median2 = element1 if element1 is not None else element2
+      break  # Exit loop after finding both medians
+
+    # Advance the index of the smaller element
+    if element1 is None or (element2 is not None and element1 > element2):
+      j += 1
+    else:
+      i += 1
+
+  # Calculate the median based on the total length
+  if total_length % 2 == 0:
+    # Even length: average of two middle elements
+    median = (median1 + median2) / 2.0
+  else:
+    # Odd length: middle element
+    median = median1
+
+  return median

@@ -1,0 +1,7 @@
+function addArrays(arr1, arr2)
+  if length(arr1) != length(arr2) then
+    print("Error: Arrays must have the same length")
+    return null
+  for i = 0 to length(arr1) - 1
+    result[i] = arr1[i] + arr2[i]
+  return result

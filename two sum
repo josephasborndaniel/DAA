@@ -1,0 +1,8 @@
+function twoSum_BruteForce(nums, target)
+  for i = 0 to length(nums) - 1 do
+    for j = i + 1 to length(nums) - 1 do
+      if nums[i] + nums[j] == target then
+        return [i, j]
+  end for
+  return []  // No two sum solution found
+end function

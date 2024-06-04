@@ -1,0 +1,12 @@
+FUNCTION isPalindrome(number)
+  DECLARE reversedNumber, originalNumber
+  SET reversedNumber TO 0
+  SET originalNumber TO number
+
+  WHILE number GREATER THAN 0
+    SET digit TO the remainder of dividing number by 10 (number % 10)
+    SET reversedNumber TO (reversedNumber x 10) + digit
+    SET number TO number divided by 10 (number / 10)
+
+  RETURN originalNumber EQUAL TO reversedNumber
+END FUNCTION

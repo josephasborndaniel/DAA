@@ -1,0 +1,29 @@
+function RegexMatch(text, pattern)
+  # Initialize a 2D boolean table (dp) to store subproblem results
+  # + 1 for empty string cases
+  rows = len(text) + 1
+  cols = len(pattern) + 1
+  dp = [[False] * cols for _ in range(rows)]
+
+  # Base cases: empty string matches empty pattern
+  dp[0][0] = True
+
+  # Iterate through the dp table
+  for i in range(1, rows):
+    for j in range(1, cols):
+      # If characters match or pattern char is ., consider match from prev cells
+      if text[i-1] == pattern[j-1] or pattern[j-1] == '.':
+        dp[i][j] = dp[i-1][j-1]
+      # Handle '*' in pattern
+      elif pattern[j-1] == '*':
+        # '*' matches 0 preceding elements (already captured in dp[i][j-1])
+        dp[i][j] = dp[i][j-1]
+        # Or '*' matches 1 or more preceding elements (check previous row)
+        if text[i-1] == pattern[j-2] or pattern[j-2] == '.':
+          dp[i][j] = dp[i][j] or dp[i-1][j]
+      # No match otherwise
+      else:
+        dp[i][j] = False
+
+  # Return the final result from the bottom right corner
+  return dp[rows-1][cols-1]

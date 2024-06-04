@@ -1,0 +1,30 @@
+function atoi(string)
+  # Initialize variables
+  result = 0
+  sign = 1
+  i = 0
+
+  # Skip leading whitespace
+  while i < length(string) and string[i] is whitespace:
+    i = i + 1
+
+  # Check for sign
+  if i < length(string) and (string[i] == '+' or string[i] == '-'):
+    sign = -1 if string[i] == '-' else 1
+    i = i + 1
+
+  # Convert digits to integer
+  while i < length(string) and string[i].isdigit():
+    # Extract digit value from character
+    digit = string[i] as integer - '0'
+
+    # Check for overflow
+    if result > MAX_INT / 10 or (result == MAX_INT / 10 and digit > MAX_INT % 10):
+      return MAX_INT if sign == 1 else MIN_INT
+    
+    # Update result with sign considered
+    result = result * 10 + digit
+    i = i + 1
+
+  # Return converted integer
+  return result * sign
